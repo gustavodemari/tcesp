@@ -1,5 +1,5 @@
 /* Despesas Services */
-var API_URL = 'http://tcesp.herokuapp.com:5000/api';
+var API_URL = 'http://tcesp.herokuapp.com/api';
 
 var DespesasSvc = angular.module('tcesp-angular-app.services.despesas', ['ngResource']);
 

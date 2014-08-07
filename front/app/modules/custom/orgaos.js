@@ -1,4 +1,4 @@
-var API_URL = 'http://tcesp.herokuapp.com:5000/api';
+var API_URL = 'http://tcesp.herokuapp.com/api';
 
 var OrgaosSvc = angular.module('tcesp-angular-app.services.orgaos', ['ngResource']);
 
