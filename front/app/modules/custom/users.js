@@ -1,5 +1,5 @@
 /* Users Services */
-var API_URL = 'http://localhost:5000/api';
+var API_URL = 'http://tcesp.herokuapp.com:5000/api';
 
 var UsersSvc = angular.module('tcesp-angular-app.services.users', ['ngResource']);
 
