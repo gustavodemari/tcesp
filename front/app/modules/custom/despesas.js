@@ -21,9 +21,27 @@ DespesasCtrl.controller('DespesasMunicipiosDetailCtrl', ['$scope', '$routeParams
 }]);
 
 DespesasCtrl.controller('DespesasOrgaosCtrl', ['$scope', '$routeParams', 'Despesas', function($scope, $routeParams, Despesas){
-  $scope.anos = [2014, 2013, 2012, 2011, 2010, 2009, 2008];
+  $scope.yearList = [2014, 2013, 2012, 2011, 2010, 2009, 2008];
   $scope.meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
   $scope.ano = $routeParams.ano || new Date().getUTCFullYear();
+
+  $scope.atualizarDespesas = function(){
+    $scope.despesas = Despesas.list({
+      municipioId: $routeParams.municipioId, 
+      orgaoId: $routeParams.orgaoId,
+      ano: $scope.ano
+    }, function(){
+      var arr = [[],[],[]];
+      $scope.despesas.forEach(function(value, index){
+        arr[0].push(formatCurrency(value.vl_empenhado));
+        arr[1].push(formatCurrency(value.vl_liquidado));
+        arr[2].push(formatCurrency(value.vl_pago));
+      })
+      $scope.chartSeries[0].data= arr[0];
+      $scope.chartSeries[1].data= arr[1];
+      $scope.chartSeries[2].data= arr[2];
+    });
+  }
 
   function formatCurrency(value){
     value = value.split(/[.,]/).join('')/100;
@@ -41,28 +59,7 @@ DespesasCtrl.controller('DespesasOrgaosCtrl', ['$scope', '$routeParams', 'Despes
                 name: 'Pago',
                 data: []
             }];
-
-  $scope.despesas = Despesas.list({
-      municipioId: $routeParams.municipioId, 
-      orgaoId: $routeParams.orgaoId,
-      ano: $scope.ano
-    }, function(){
-      var arr = [[],[],[]];
-      $scope.despesas.forEach(function(value, index){
-        arr[0].push(formatCurrency(value.vl_empenhado));
-        arr[1].push(formatCurrency(value.vl_liquidado));
-        arr[2].push(formatCurrency(value.vl_pago));
-      })
-      $scope.chartSeries[0].data= arr[0];
-      $scope.chartSeries[1].data= arr[1];
-      $scope.chartSeries[2].data= arr[2];
-    });
-
-  $scope.ideas = [
-        ['ideas1', 1],
-        ['ideas2', 8],
-        ['ideas3', 5]
-    ];
+    $scope.atualizarDespesas();
 
 }]);
 
