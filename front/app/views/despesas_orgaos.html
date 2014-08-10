@@ -1,3 +1,18 @@
+<script type="text/ng-template" id="customTemplate.html">
+  <a>
+      <img ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/{{match.model.bandeira}}" width="20">
+      <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+  </a>
+</script>
+
+<div class="row">
+  <div class="col-md-4">
+    <div id="search">
+      <input type="text" ng-model="customSelected" placeholder="Escolha um munícipio" typeahead="municipio.nome for municipio in municipiosWithFlags | filter:{nome:$viewValue} |limitTo:8" typeahead-loading="loadingLocations" typeahead-template-url="customTemplate.html" class="form-control">
+    </div>
+  </div>
+</div>
+<hr>
 <h1>{{despesas[0].ds_municipio}}</h1>
 <h3>{{despesas[0].ds_orgao}}</h3>
 <ol class="breadcrumb">
