@@ -72,5 +72,5 @@ gulp.task('html', function(){
 gulp.task('build', ['js', 'css', 'fonts', 'html', 'app']);
 
 gulp.task('watch', function(){
-  gulp.watch('app/modules/**', ['build']);
+  gulp.watch(['app/modules/**'], ['build']);
 })
