@@ -19,10 +19,24 @@ DespesasCtrl.controller('DespesasMunicipiosCtrl', ['$scope', 'Despesas', functio
 DespesasCtrl.controller('DespesasMunicipiosDetailCtrl', 
   ['$scope', '$routeParams', 'Despesas', 'Municipios', 'Wikipedia',
   function($scope, $routeParams, Despesas, Municipios, Wikipedia){
-  $scope.despesas = Despesas.list({municipioId: $routeParams.municipioId});
+  $scope.despesas = Despesas.list(
+    {municipioId: $routeParams.municipioId}, 
+    function(data){
+      getWikipediaDescription(data[0].ds_municipio);
+    }
+  );
+
   $scope.municipios = Municipios.list();
-  $scope.wiki = Wikipedia.list({titles:'Guarulhos'});
-  console.log($scope.wiki);
+
+  function getWikipediaDescription(nomeMunicipio){
+    Wikipedia.list({titles: nomeMunicipio }, function(result){
+    for (var i in result.query.pages){
+      $scope.wikiDescription = result.query.pages[i].extract;
+      }
+    });  
+  }
+  
+
 }]);
 
 DespesasCtrl.controller('DespesasOrgaosCtrl', ['$scope', '$routeParams', 'Despesas', function($scope, $routeParams, Despesas){

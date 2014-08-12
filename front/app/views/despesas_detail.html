@@ -1,4 +1,30 @@
 <h1>{{despesas[0].ds_municipio}}</h1>
-<ul>
-  <li ng-repeat="despesa in despesas">{{despesa.vl_empenhado}}</li>
-</ul>
+<hr>
+<div id="description" ng-show="wikiDescription">
+  <div ng-bind-html="wikiDescription">
+  </div>
+  <span class="help-block">Informação retirada da Wikipedia</span>
+</div>
+<hr>
+<div id="despesas">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th><a href="" ng-click="">Mês/Ano</a></th>
+        <th><a href="" ng-click="">Orgão</a></th>
+        <th title="Valor reservado para efetuar um pagamento planejado">Empenhado</th>
+        <th title="Valor quando o servico foi executado">Liquidado</th>
+        <th title="Valor que o fornecedor recebeu">Pago</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="despesa in despesas | orderBy:despesa.ds_orgao">
+        <td>{{despesa.mes_referencia}}/{{despesa.ano_exercicio}}</td>
+        <td><a href="">{{despesa.ds_orgao}}</a></td>
+        <td>{{despesa.vl_empenhado}}</td>
+        <td>{{despesa.vl_liquidado}}</td>
+        <td>{{despesa.vl_pago}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -7,14 +7,16 @@ WikipediaSvc.factory('Wikipedia', ['$resource', function($resource){
     action: 'query',
     prop: 'extracts',
     format: 'json',
+    //explaintext: '',
     exintro: '',
-    titles: '@title'
+    titles: '@title',
+    callback: 'JSON_CALLBACK'
   };
   var header = {
     'Content-type':' ; charset=UTF-8'
   };
   return $resource(WIKI_API_URL, {}, {
-    list: {method: 'GET', params: parameters, headers: header, isArray: true}
+    list: {method: 'JSONP', params: parameters, headers: header}
   });
 }]);
 

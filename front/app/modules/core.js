@@ -1,6 +1,7 @@
 /* Main App Angular*/
 var app = angular.module('tcesp-angular-app.core',[
   'ngRoute',
+  'ngSanitize',
   'ui.bootstrap',
   'tcesp-angular-app.directives',
   'tcesp-angular-app.services',
