@@ -32,4 +32,4 @@ OrgaosCtrl.controller('OrgaosListCtrl', ['$scope', '$window','Orgaos', function(
 
   $scope.orgaos =  getStoredOrgaos() || Orgaos.list(storeOrgaos);
 
-}])
+}]);

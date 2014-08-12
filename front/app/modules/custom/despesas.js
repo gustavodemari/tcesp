@@ -16,8 +16,13 @@ DespesasCtrl.controller('DespesasMunicipiosCtrl', ['$scope', 'Despesas', functio
   $scope.despesas = Despesas.list();
 }]);
 
-DespesasCtrl.controller('DespesasMunicipiosDetailCtrl', ['$scope', '$routeParams', 'Despesas', function($scope, $routeParams, Despesas){
+DespesasCtrl.controller('DespesasMunicipiosDetailCtrl', 
+  ['$scope', '$routeParams', 'Despesas', 'Municipios', 'Wikipedia',
+  function($scope, $routeParams, Despesas, Municipios, Wikipedia){
   $scope.despesas = Despesas.list({municipioId: $routeParams.municipioId});
+  $scope.municipios = Municipios.list();
+  $scope.wiki = Wikipedia.list({titles:'Guarulhos'});
+  console.log($scope.wiki);
 }]);
 
 DespesasCtrl.controller('DespesasOrgaosCtrl', ['$scope', '$routeParams', 'Despesas', function($scope, $routeParams, Despesas){
@@ -37,12 +42,12 @@ DespesasCtrl.controller('DespesasOrgaosCtrl', ['$scope', '$routeParams', 'Despes
         arr[0].push(formatCurrency(value.vl_empenhado));
         arr[1].push(formatCurrency(value.vl_liquidado));
         arr[2].push(formatCurrency(value.vl_pago));
-      })
+      });
       $scope.chartSeries[0].data= arr[0];
       $scope.chartSeries[1].data= arr[1];
       $scope.chartSeries[2].data= arr[2];
     });
-  }
+  };
 
   function formatCurrency(value){
     value = value.split(/[.,]/).join('')/100;
@@ -126,7 +131,7 @@ DespesasDtv.directive('hcPie', function () {
         }, true);
 
       }
-    }
+    };
 });
 
 
@@ -191,7 +196,7 @@ DespesasDtv.directive('hcStacked', function () {
           }
         }, true);
       }
-    }
+    };
 });
 
 //http://jsfiddle.net/m6er5/
